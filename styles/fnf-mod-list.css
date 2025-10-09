@@ -1,0 +1,151 @@
+/* Ensure the page takes full width and height */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.wrapper {
+    min-height: 100vh; /* Ensure the wrapper takes at least the full viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    flex: 1; /* Allow the content to grow and fill available space */
+    overflow-y: auto; /* Enable vertical scrolling for overflowing content */
+}
+
+/* Updated grid layout for mods */
+.mod-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; /* Increased gap for better spacing */
+    padding: 20px;
+}
+
+.mod-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer; /* Make the entire card clickable */
+}
+
+.mod-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.mod-preview {
+    width: 100%;
+    height: 219.933px; /* Set height to fit within 219.933px */
+    max-width: 219.933px; /* Ensure the width does not exceed 219.933px */
+    object-fit: contain; /* Ensure the image fits within the dimensions without cropping */
+    transition: opacity 0.3s ease;
+}
+
+.mod-item:hover .mod-preview {
+    opacity: 0.8;
+}
+
+.mod-item h3 {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    margin: 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 1.2em;
+    text-align: center;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+.mod-item .btn {
+    display: none;
+}
+
+.blurred {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+/* Style for the gear icon */
+.gear-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.gear-icon:hover {
+    background-color: #0056b3;
+}
+
+/* Style for modal size customization */
+#modPlayerModal .modal-dialog {
+    transition: width 0.3s ease, height 0.3s ease; /* Smooth transition for size changes */
+}
+
+/* Ensure modal-content matches modal-dialog size */
+#modPlayerModal .modal-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#modPlayerModal .modal-body {
+    flex: 1; /* Allow the iframe to grow and fill available space */
+    padding: 0; /* Remove padding for a seamless iframe display */
+}
+
+#modPlayerModal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Resizable modal styles */
+.resizable-modal {
+    resize: both;
+    overflow: auto;
+}
+
+/* Full-screen modal styles */
+.fullscreen-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important; /* Ensure full width of the viewport */
+    height: 100vh !important; /* Ensure full height of the viewport */
+    margin: 0 !important;
+    z-index: 1055 !important;
+    padding: 0 !important; /* Remove any padding */
+}
+
+.fullscreen-modal .modal-content {
+    flex: 1; /* Allow modal-content to grow and fill available space */
+    width: 100% !important; /* Ensure full width */
+    height: 100% !important; /* Ensure full height */
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+}
