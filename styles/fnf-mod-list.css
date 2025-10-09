@@ -1,151 +1,257 @@
-/* Ensure the page takes full width and height */
-html, body {
+:root {
+    --bg-gradient-start: #1c1f2b;
+    --bg-gradient-end: #121521;
+    --card-bg: rgba(22, 25, 36, 0.9);
+    --accent: #ff71a6;
+    --accent-secondary: #6c63ff;
+    --text-light: #f0f4ff;
+    --border-radius: 1.25rem;
+    --transition-base: 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-light);
+    background: linear-gradient(160deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 113, 166, 0.2), transparent 55%),
+                radial-gradient(circle at 80% 10%, rgba(108, 99, 255, 0.3), transparent 60%),
+                radial-gradient(circle at 50% 80%, rgba(108, 99, 255, 0.15), transparent 65%);
+    z-index: -1;
 }
 
 .wrapper {
-    min-height: 100vh; /* Ensure the wrapper takes at least the full viewport height */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 .page-content {
-    flex: 1; /* Allow the content to grow and fill available space */
-    overflow-y: auto; /* Enable vertical scrolling for overflowing content */
+    flex: 1;
 }
 
-/* Updated grid layout for mods */
+.page-header .lead {
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgba(240, 244, 255, 0.85);
+}
+
+.text-gradient {
+    background: linear-gradient(120deg, var(--accent), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-card,
+.mod-section {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(14px);
+}
+
+.hero-card .btn {
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding-inline: 2rem;
+    font-weight: 600;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hero-card .btn:hover,
+.hero-card .btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(255, 113, 166, 0.35);
+}
+
+.mod-section .card-body {
+    padding: 2.5rem;
+}
+
 .mod-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px; /* Increased gap for better spacing */
-    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
 }
 
-.mod-item {
+.mod-card {
     position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer; /* Make the entire card clickable */
-}
-
-.mod-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.mod-preview {
-    width: 100%;
-    height: 219.933px; /* Set height to fit within 219.933px */
-    max-width: 219.933px; /* Ensure the width does not exceed 219.933px */
-    object-fit: contain; /* Ensure the image fits within the dimensions without cropping */
-    transition: opacity 0.3s ease;
-}
-
-.mod-item:hover .mod-preview {
-    opacity: 0.8;
-}
-
-.mod-item h3 {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    margin: 0;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(18, 21, 33, 0.8);
+    border-radius: 1rem;
+    padding: 1.25rem 1rem 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    cursor: pointer;
     text-align: center;
-    border-radius: 5px;
-    text-transform: capitalize;
+    outline: none;
 }
 
-.mod-item .btn {
-    display: none;
+.mod-card:focus-visible {
+    border-color: rgba(255, 113, 166, 0.7);
+    box-shadow: 0 0 0 4px rgba(255, 113, 166, 0.25);
 }
 
-.blurred {
-    filter: blur(5px);
-    pointer-events: none;
+.mod-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.35);
 }
 
-/* Style for the gear icon */
+.mod-card__image {
+    width: 100%;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.mod-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform var(--transition-base);
+}
+
+.mod-card:hover .mod-card__image img {
+    transform: scale(1.04);
+}
+
+.mod-card__title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-light);
+}
+
 .gear-icon {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 50px;
-    height: 50px;
-    background-color: #007bff;
-    color: white;
+    width: 54px;
+    height: 54px;
+    border: none;
+    background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+    color: #fff;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35);
     cursor: pointer;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
     z-index: 1000;
 }
 
-.gear-icon:hover {
-    background-color: #0056b3;
+.gear-icon:hover,
+.gear-icon:focus-visible {
+    transform: translateY(-3px) rotate(10deg);
+    box-shadow: 0 24px 38px rgba(0, 0, 0, 0.4);
 }
 
-/* Style for modal size customization */
-#modPlayerModal .modal-dialog {
-    transition: width 0.3s ease, height 0.3s ease; /* Smooth transition for size changes */
-}
-
-/* Ensure modal-content matches modal-dialog size */
 #modPlayerModal .modal-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    background: rgba(15, 18, 28, 0.95);
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+#modPlayerModal .modal-header,
+#modPlayerModal .modal-footer {
+    border-color: rgba(255, 255, 255, 0.05);
 }
 
 #modPlayerModal .modal-body {
-    flex: 1; /* Allow the iframe to grow and fill available space */
-    padding: 0; /* Remove padding for a seamless iframe display */
+    padding: 0;
+    background: #0b0d16;
 }
 
 #modPlayerModal iframe {
     width: 100%;
-    height: 100%;
+    height: 70vh;
     border: none;
+    border-radius: 0 0 1rem 1rem;
 }
 
-/* Resizable modal styles */
 .resizable-modal {
     resize: both;
     overflow: auto;
 }
 
-/* Full-screen modal styles */
 .fullscreen-modal {
     position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important; /* Ensure full width of the viewport */
-    height: 100vh !important; /* Ensure full height of the viewport */
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
     margin: 0 !important;
     z-index: 1055 !important;
-    padding: 0 !important; /* Remove any padding */
+    padding: 0 !important;
 }
 
 .fullscreen-modal .modal-content {
-    flex: 1; /* Allow modal-content to grow and fill available space */
-    width: 100% !important; /* Ensure full width */
-    height: 100% !important; /* Ensure full height */
+    width: 100% !important;
+    height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     display: flex;
     flex-direction: column;
+}
+
+.fullscreen-modal #playFNF {
+    height: 100% !important;
+}
+
+@media (max-width: 992px) {
+    .hero-card .row {
+        flex-direction: column-reverse;
+    }
+
+    .hero-card .col-lg-6:first-child {
+        text-align: center;
+    }
+
+    .mod-section .card-body {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-content {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .gear-icon {
+        width: 48px;
+        height: 48px;
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .mod-section .card-body {
+        padding: 1.5rem;
+    }
 }
