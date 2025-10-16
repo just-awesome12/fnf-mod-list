@@ -101,4 +101,4 @@ Contributions that add new mods, improve styling, or enhance functionality are w
 
 ## License
 
-This project retains the licensing terms of the original source. If you intend to redistribute or host the mod files, ensure you respect the licenses of the individual mods and external assets.
+This project retains the licensing terms of the original source. If you intend to redistribute or host the mod files, ensure you respect the licenses of the individual mods and external assets. 
